@@ -1,2 +1,2 @@
-Connected with Mysql Db
+Connected with MySQL 
 Created an get Api 
