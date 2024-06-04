@@ -89,7 +89,52 @@ const getStudentDetail = async (req, res) => {
 
 
 }
+
+
+const CreateStudents = async (req, res) => {
+  try {
+    const { id, name, roll_no, fees, classes, medium } = req.body
+    console.log(id, name, roll_no, fees, classes, medium);
+    console.log(req.body);
+    if (id, name, roll_no, fees, classes, medium) {
+      const studentDetail = await db.query(`insert into  student_db.student(id, name, roll_no, fees, classes ,medium) values(?,?,?,?,?,?)`, [id, name, roll_no, fees, classes, medium])
+      if (!studentDetail) {
+        res.status(404).json(
+          {
+            success: false,
+            message: "Error in Create Students",
+            data: err
+          }
+        )
+      }
+      res.status(200).json(req.body)
+
+    } else {
+      res.status(406).json(
+        {
+          success: false,
+          message: "Error in Create Students",
+          data: err
+        }
+      )
+    }
+  }
+  catch (err) {
+    res.status(500).send(
+      {
+        success: false,
+        message: "Error in Create Students",
+        data: err
+      }
+
+    )
+  }
+
+
+
+}
 module.exports = {
   getStudents,
-  getStudentDetail
+  getStudentDetail,
+  CreateStudents
 };

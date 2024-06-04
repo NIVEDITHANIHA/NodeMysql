@@ -5,12 +5,15 @@ const dotenv = require("dotenv");
 const mysqlConnection = require("./config/db");
 const router = require('./routers/router')
 
-dotenv.config();
+let result = dotenv.config();
+console.log(result);
+
 
 const server = express();
 
 server.use(morgan("dev"));
 server.use(express.json());
+server.use(express.urlencoded());
 server.use(router);
 
 server.get("/", (req, res) => {
@@ -20,6 +23,7 @@ server.get("/", (req, res) => {
 
 const port = process.env.PORT || 4200; 
 
+
 mysqlConnection.query("SELECT 1")
   .then(() => {
     console.log('Mysql Database connected'.bgGreen.bgBlue);
@@ -28,5 +32,5 @@ mysqlConnection.query("SELECT 1")
     });
   })
   .catch((err) => {
-    console.log(err);
+    console.log("err".bgGreen.bgBlue,err);
   });
