@@ -2,7 +2,7 @@ const db = require("../config/db");
 /* Functionality For get APi */
 const getStudents = async (req, res) => {
   try {
-    const getData = await db.query("select * from student");
+    const getData = await db.query("select * from student order by student_db.student.name asc");
     // console.log("getData".bgWhite.red,getData);
     // console.log("getData".bgGreen.white,getData[0]);
 
