@@ -1,5 +1,6 @@
 const express = require('express');
 const { getStudents, getStudentDetail, createStudents ,updateStudents ,deleteStudents } = require('../controller/students');
+const { createDatabase } = require('../controller/customer');
 const router = express.Router()
 /* get All Api */
 router.get("/getStudents",getStudents);
@@ -15,5 +16,9 @@ router.put("/updatedStudents/:id",updateStudents)
 
 /* Delete an Api */
 router.delete("/deleteStudents/:id",deleteStudents)
+
+/* Create a new Database */
+router.post("/customer",createDatabase)
+
 
 module.exports = router
