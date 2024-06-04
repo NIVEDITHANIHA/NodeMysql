@@ -6,7 +6,7 @@ const mysqlConnection = require("./config/db");
 const router = require('./routers/router')
 
 let result = dotenv.config();
-console.log(result);
+// console.log(result);
 
 
 const server = express();
