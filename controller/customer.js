@@ -70,5 +70,25 @@ const insertCustomer = async (req, res) => {
 
 }
 
+const getCustomerList = async(req,res)=>{
+    try {
+        const getCustomers = await db.query("select * from customers.needbased_customer group by customers.needbased_customer.customer_name order by customers.needbased_customer.customer_name asc ")
+        res.status(200).json({
+            success :true,
+            message : "Succesfyully created customer List",
+            data:getCustomers[0]
+        })
 
-module.exports = { createDatabase, customersTable, insertCustomer }
+    } catch (error) {
+        res.status(500).json({
+            success :false,
+            message : "No Customer Found",
+            data:error
+        })
+        
+    }
+
+}
+
+
+module.exports = { createDatabase, customersTable, insertCustomer , getCustomerList}

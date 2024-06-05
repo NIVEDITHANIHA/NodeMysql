@@ -1,0 +1,76 @@
+Node Js My findings
+
+
+*   Use V8 Engine 
+*   Rayndahl - creater , use V8 engine embeded in the C++ program ==> Node js 
+*   Node js also use some module , 
+*   Run javascript outside of the browser
+*   Accessing File System & better network capablity
+*   its a non-blocking & event architecture
+*   open Source
+*  Node Js is non-blocking I/O
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------REPL------------------------------
+REPL => 
+Read       =>Read user input
+Evaluvate  => Evaluvate user input
+Print      => Print or output the result
+Loop       => Return & wait for new user input
+
+
+
+* In visual studio code or cmd after installing Node & while we type node on the vscode REPL is active
+* Node Js suppports all version of javascript
+* .exit , ctrl + c , ctrl + D
+* in REPL _ is a special variable which store the result of previous variable
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------readline------------------------------
+* it is a module
+* giving output to the terminal & giving input to the terminal
+* there is a createInterface for input & output
+* on is for event handling
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------fs------------------------------
+
+* it is a module
+* fs.readFileSync - this is only for synchronous , callbacks never works here
+* fs.writeFileSync - this is only for synchronous , callbacks never works here
+* fs.readFile - this is only for Asynchronous , callbacks are needed here
+* fs.writeFile - this is only for Asynchronous , callbacks are needed here
+*  Node Js is non-blocking I/O
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------Http------------------------------
+* It is a Module 
+* It is for creating a Server
+--------------------------------------------------------------------------------------------------------------------------------------------
+Request response Model / Client Server Architecture
+* the client a  send to the request to server & server gives a response
+* DNS  - Domain Name Server 
+*It match the web adress & Ip address of the server
+* Convert the domain name & Ip address of the server
+*a TCP socket is connected between the client & the server
+*Fundamental Control system - How the data moves on the Internet
+*Transmission Control Protocol
+*Internet Protocol
+*HTTP - Hyper Text Transfer Protocol - Clent & web server Communicate
+
+
+*Different type of request
+GET
+POST
+PUT
+DELETE
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+body-parser
+one of the npm package
+middleware for parsing request bodies
+Requires an additional package
+
+In modern Express applications, generally  use the built-in express.json() and express.urlencoded() middleware for parsing request bodies

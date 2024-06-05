@@ -1,6 +1,6 @@
 const express = require('express');
 const { getStudents, getStudentDetail, createStudents ,updateStudents ,deleteStudents } = require('../controller/students');
-const { createDatabase, customersTable, insertCustomer } = require('../controller/customer');
+const { createDatabase, customersTable, insertCustomer, getCustomerList } = require('../controller/customer');
 const router = express.Router()
 /* get All Api */
 router.get("/getStudents",getStudents);
@@ -21,6 +21,8 @@ router.delete("/deleteStudents/:id",deleteStudents)
 router.post("/customer/createTable",createDatabase ,customersTable )
 /* Create customer using insert into  */
 router.post("/create_customers",insertCustomer  )
+/* get A customer List */
+router.get("/getCustomer",getCustomerList)
 
 
 module.exports = router

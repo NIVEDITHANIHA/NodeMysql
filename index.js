@@ -10,10 +10,11 @@ let result = dotenv.config();
 
 
 const server = express();
-
+/* Npm Package  */
 server.use(morgan("dev"));
+/* For parsing object to json */
 server.use(express.json());
-server.use(express.urlencoded());
+server.use(express.urlencoded({extended:true}));
 server.use(router);
 
 server.get("/", (req, res) => {

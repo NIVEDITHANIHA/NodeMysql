@@ -1,0 +1,44 @@
+Mysql
+db - collection of table 
+coollection - the group of rows& table
+
+SELECT * FROM moviesdb.movies where release_year="2022";
+here moviesdb = database & .movies is the table
+* it denotes for all
+Where is an case sensitive
+
+<=,>= are basic numerical operations
+between & or are other operators , used insted for <= & >=
+
+sorting - order-by
+2 methods are asc - ascending & descending desc
+
+Limit is used fpr the limit
+
+offset used to remove not needed rows
+
+Max Min Avg used for the numerical to get max , min , avg
+
+as for giving certain names
+
+groupby give the summary of the column
+____________________________________________________________________________
+
+*priority for quer terminology
+From -> where -> groupBy ->having -> order by
+____________________________________________________________________________
+
+join - inner 
+
+left outer join
+union
+right outer join 
+
+we use on for joining its is little bit complicated so we use  using
+____________________________________________________________________________
+
+
+insert into -> inserting a row
+update -> upadating a row
+
+* priority comes group by then order by
