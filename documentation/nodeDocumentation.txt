@@ -68,9 +68,55 @@ DELETE
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
-body-parser
+BODY -PARSER
 one of the npm package
 middleware for parsing request bodies
 Requires an additional package
 
 In modern Express applications, generally  use the built-in express.json() and express.urlencoded() middleware for parsing request bodies
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+*DATABASE SCHEMA MIGRATION WITH NODE JS
+
+*Knex is multi-platform SQL query builder with built-in migration framework
+*it is an NPM package
+*After downloading , we have tto initialize knex using knex init
+
+version of inital knex Schema:-
+knex migrate:make 001_initial_schema
+
+for initializing there are 2 functions ,Inside of 001_initial_schema.js file we have 2 functions.
+exports.up :function (){
+
+}
+
+exports.down :function (){
+    
+}
+
+*to migrate knex , these are the steps used to migrate
+
+1)knex migrate:latest 
+2)knex migrate:rollback
+3)knex migrate:rollback --all
+
+*these both used for migrating the all latest version
+
+*To run the next step  of migraton
+knex migrate:up
+
+*To undo  the latest step  of migraton
+knex migrate:down
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+HELMET 
+
+*it is a collection of middleware for securing the  HTTP header
+*The Importance of Helmet
+1)Security-by-Default 
+2)Vulnerability Mitigation
+3)Content Security Policy (CSP)
+4)No-Sniff Defense
+

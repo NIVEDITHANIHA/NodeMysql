@@ -4,25 +4,27 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const mysqlConnection = require("./config/db");
 const router = require('./routers/router')
-
+const helmet = require("helmet")
 let result = dotenv.config();
 // console.log(result);
 
 
 const server = express();
+/* securing the  HTTP header */
+server.use(helmet())
 /* Npm Package  */
 server.use(morgan("dev"));
 /* For parsing object to json */
 server.use(express.json());
-server.use(express.urlencoded({extended:true}));
+server.use(express.urlencoded({ extended: true }));
 server.use(router);
 
 server.get("/", (req, res) => {
   res.send("<h1>Hello Niveditha</h1>");
-  res.end(); 
+  res.end();
 });
 
-const port = process.env.PORT || 4200; 
+const port = process.env.PORT || 4200;
 
 
 mysqlConnection.query("SELECT 1")
@@ -33,5 +35,5 @@ mysqlConnection.query("SELECT 1")
     });
   })
   .catch((err) => {
-    console.log("err".bgGreen.bgBlue,err);
+    console.log("err".bgGreen.bgBlue, err);
   });
