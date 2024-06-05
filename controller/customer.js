@@ -23,7 +23,7 @@ const createDatabase = async (req, res, next) => {
 
 }
 
-const customersTable = async (req, res, ) => {
+const customersTable = async (req, res,) => {
     try {
         const createTable = await db.query(`
             CREATE TABLE customers.needbased_customer (
@@ -57,7 +57,7 @@ const insertCustomer = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "Customer table created",
-            data : req.body
+            data: req.body
         });
     }
     catch (err) {
@@ -70,25 +70,49 @@ const insertCustomer = async (req, res) => {
 
 }
 
-const getCustomerList = async(req,res)=>{
+const getCustomerList = async (req, res) => {
     try {
         const getCustomers = await db.query("select * from customers.needbased_customer group by customers.needbased_customer.customer_name order by customers.needbased_customer.customer_name asc ")
         res.status(200).json({
-            success :true,
-            message : "Succesfyully created customer List",
-            data:getCustomers[0]
+            success: true,
+            message: "Succesfyully created customer List",
+            data: getCustomers[0]
         })
 
     } catch (error) {
         res.status(500).json({
-            success :false,
-            message : "No Customer Found",
-            data:error
+            success: false,
+            message: "No Customer Found",
+            data: error
         })
-        
+
     }
 
 }
 
 
-module.exports = { createDatabase, customersTable, insertCustomer , getCustomerList}
+const customerAgaintsupplier = async (req, res) => {
+    try {
+
+        const againstCustomer = await db.query(`select * from customers.needbased_customer right join customers.supplier on customers.needbased_customer.id = customers.supplier.against_customer_id`)
+
+        res.status(200).json({
+            success: true,
+            message: " Against Customer Found",
+            data: againstCustomer[0]
+        })
+
+
+
+    }
+    catch(error) {
+        res.status(500).json({
+            success: false,
+            message: "No Against Found",
+            data: error
+        })
+    }
+}
+
+
+module.exports = { createDatabase, customersTable, insertCustomer, getCustomerList, customerAgaintsupplier }

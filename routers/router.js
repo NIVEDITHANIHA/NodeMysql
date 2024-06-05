@@ -1,6 +1,6 @@
 const express = require('express');
 const { getStudents, getStudentDetail, createStudents ,updateStudents ,deleteStudents } = require('../controller/students');
-const { createDatabase, customersTable, insertCustomer, getCustomerList } = require('../controller/customer');
+const { createDatabase, customersTable, insertCustomer, getCustomerList, customerAgaintsupplier } = require('../controller/customer');
 const router = express.Router()
 /* get All Api */
 router.get("/getStudents",getStudents);
@@ -23,6 +23,8 @@ router.post("/customer/createTable",createDatabase ,customersTable )
 router.post("/create_customers",insertCustomer  )
 /* get A customer List */
 router.get("/getCustomer",getCustomerList)
+
+router.get("/getCustomerAgaintsupplier",customerAgaintsupplier)
 
 
 module.exports = router
