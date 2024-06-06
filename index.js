@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const mysqlConnection = require("./config/db");
 const router = require('./routers/router')
+const productrouter = require('./routers/productsrouter')
 const helmet = require("helmet")
 let result = dotenv.config();
 // console.log(result);
