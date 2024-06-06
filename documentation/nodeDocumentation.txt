@@ -120,3 +120,30 @@ HELMET
 3)Content Security Policy (CSP)
 4)No-Sniff Defense
 
+--------------------------------------------------------------------------------------------------------------------------------------------
+CRON JOBS :-
+
+*These are the tasks that run automatically according to the given time by the operating system. 
+*It is usually used for system admin jobs such as backups, logging, sending newsletters, subscription emails and more.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+MICRO SERVICE ORIENTED Architecture
+*single threaded
+*buffer less
+*Asynchronous
+*highly scalable
+*extreme quick
+*event driven
+*licenced
+
+*example for microservice node js frameworks
+express.js
+next.js
+feather.js
+hapi.js
+loopback.js
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+SERVER LESS LAMBDA
+ *AWS LAMBDA
+ *run the code virtually without any type of application
