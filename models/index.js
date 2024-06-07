@@ -1,14 +1,14 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const dbconfig = require('../config/dbconfig');
 
-const sequelize = new Sequelize(dbconfig.db, dbconfig.user, dbconfig.password, {
+const sequelizeDb = new Sequelize(dbconfig.db, dbconfig.user, dbconfig.password, {
   host: dbconfig.host,
   dialect: dbconfig.dialect,
   logging: false,
 });
 
 
-sequelize.authenticate().then(() => {
+sequelizeDb.authenticate().then(() => {
   console.log('Connection has been established successfully.');
 
 })
@@ -17,13 +17,13 @@ sequelize.authenticate().then(() => {
   })
 const db = {}
 db.Sequelize = Sequelize
-db.sequelize = sequelize
+db.sequelizeDb = sequelizeDb
 
-db.products = require("./productsmodel")(sequelize, DataTypes)
-db.sequelize.sync({ force: false }).then((res) => {
+db.products = require("./productsmodel")(sequelizeDb, DataTypes)
+db.sequelizeDb.sync({ force: false }).then((res) => {
   console.log("sync done! ");
 }).catch((error) => {
   console.log(error);
 })
 
-module.exports = db
+module.exports = {sequelizeDb ,db}

@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const mysqlConnection = require("./config/db");
 const router = require('./routers/router')
+const routerSequilize = require('./routers/routersequillize')
 const helmet = require("helmet")
 let result = dotenv.config();
 // console.log(result);
@@ -18,6 +19,7 @@ server.use(morgan("dev"));
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(router);
+server.use(routerSequilize);
 
 server.get("/", (req, res) => {
   res.send("<h1>Hello Niveditha</h1>");

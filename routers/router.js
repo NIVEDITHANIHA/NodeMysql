@@ -13,8 +13,8 @@ FOR
 MYSQL RAQ QUERIES
 
 */
-/* get All Api */
-router.get("/getStudents", getStudents);
+// /* get All Api */
+// router.get("/getStudents", getStudents);
 
 /* get Detail Api using query terminology select & clauses  where */
 router.get("/getStudent/:id", getStudentDetail);

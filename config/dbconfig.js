@@ -2,7 +2,7 @@ module.exports = {
     host: 'localhost',
     user: "root",
     password: "",
-    db: "sequilize_db",
+    db: "student_db",
     dialect: "mysql"
 
 }
