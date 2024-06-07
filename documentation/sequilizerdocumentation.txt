@@ -1,3 +1,8 @@
 SEQUILIZER
 ______________________________________________________________________________________________________________________________________________________________________________
 
+*it is an ORM relation maper
+*It dosent need an raw sql
+*Provide Js functions
+* SQL based datastructure
+*it needs an Model whil mmysql needs an raw query
