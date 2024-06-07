@@ -20,7 +20,7 @@ MYSQL RAQ QUERIES
 router.get("/getStudent/:id", getStudentDetail);
 
 /* create Api using query terminology insert into   */
-router.post("/createStudents", createStudents);
+// router.post("/createStudents", createStudents);
 
 /* Update an Api query terminology upddate */
 router.put("/updatedStudents/:id", updateStudents)
@@ -40,14 +40,5 @@ router.get("/getCustomerAgaintsupplier", customerAgaintsupplier)
 
 
 
-/*______________________________________________________________________________________________________________________________________________________________________________
 
-THE 
-API 
-EndPonts
-FOR
-SEQUILIZE
-
-*/
-router.post("/createProducts", addProducts)
 module.exports = router
