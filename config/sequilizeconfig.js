@@ -15,6 +15,25 @@ sequelizeDb.authenticate().then(() => {
   .catch((error) => {
     console.error('Unable to connect to the database:', error);
   })
+  const executeSequelizeQuery = async (query, params, customParams, type) => {
+    console.log(query, params, customParams, type);
+    try {
+      const result = await sequelizeDb.query(query, { replacements: params, type: type });
+      console.log(result);
+      return { err: null, res: result };
+    } catch (error) {
+      return { err: error, res: null };
+    }
+  };
+
+
+
+
+
+
+
+
+
 
 
   /*dbModelSequilize used for Model used Sequilize function for crud Operations  */
@@ -28,4 +47,7 @@ dbModelSequilize.sequelizeDb.sync({ force: false }).then((res) => {
   console.log(error);
 })
 
-module.exports = {sequelizeDb ,dbModelSequilize}
+
+
+
+module.exports = {sequelizeDb ,dbModelSequilize,executeSequelizeQuery }
