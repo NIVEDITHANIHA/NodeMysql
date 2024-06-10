@@ -1,5 +1,5 @@
-const { sequelizeDb } = require("../models/index");
 const sequelize = require("sequelize");
+const { sequelizeDb } = require("../config/sequilizeconfig");
 
 
 const executeSequelizeQuery = async (query, params, customParams, type) => {
@@ -19,7 +19,7 @@ const executeSequelizeQuery = async (query, params, customParams, type) => {
 /* Functionality For get APi */
 const getStudents = async (req, res) => {
   try {
-    const getData = await executeSequelizeQuery("select * from student order by student_db.student.name desc", {}, {}, sequelize.QueryTypes.SELECT).then((getstudentsresponses) => {
+    const getstudentsresponses = await executeSequelizeQuery("select * from student order by student_db.student.name desc", {}, {}, sequelize.QueryTypes.SELECT)
       // console.log("getstudentsresponses.res", getstudentsresponses);
       if (getstudentsresponses.res) {
         res.status(200).send({
@@ -35,8 +35,6 @@ const getStudents = async (req, res) => {
           data: getstudentsresponses.err
         });
       }
-
-    })
 
   } catch (err) {
     res.status(500).send({
