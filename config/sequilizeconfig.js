@@ -16,10 +16,10 @@ sequelizeDb.authenticate().then(() => {
     console.error('Unable to connect to the database:', error);
   })
   const executeSequelizeQuery = async (query, params, customParams, type) => {
-    console.log(query, params, customParams, type);
+    // console.log(query, params, customParams, type);
     try {
       const result = await sequelizeDb.query(query, { replacements: params, type: type });
-      console.log(result);
+      // console.log(result);
       return { err: null, res: result };
     } catch (error) {
       return { err: error, res: null };

@@ -1,7 +1,7 @@
 const express = require('express');
 const { getStudents, createStudentProfile, updateStudentProfile } = require('../controller/studentsequilizeController');
 const { addProducts, getAllProducts } = require('../controller/productscontroller');
-const { registrationAuth, LoginAuth } = require('../controller/Authsequilize');
+const { registrationAuth, LoginAuth, getStudentLogined } = require('../controller/Authsequilize');
 const { authjwtmiddleware } = require('../middleware/Authjwtmiddleware');
 const routerSequilize = express.Router()
 
@@ -14,13 +14,6 @@ FOR
 SEQUILIZE
 
 */
-/* get All Api */
-routerSequilize.get("/getStudents", getStudents);
-
-routerSequilize.post("/createStudents", createStudentProfile);
-
-routerSequilize.put("/updatedStudents/:id", updateStudentProfile)
-
 /* API For MODEL BASED PRODUCTS */
 
 
@@ -32,6 +25,16 @@ routerSequilize.get("/getAllProducts", getAllProducts);
 /* API For JWT AUTH */
 
 routerSequilize.post("/student_register", registrationAuth);
-routerSequilize.post("/student_login", authjwtmiddleware , LoginAuth);
+routerSequilize.post("/student_login",LoginAuth);
+
+routerSequilize.get("/getLogined_students", authjwtmiddleware, getStudentLogined);
+
+
+/* get All Api */
+routerSequilize.get("/getStudents", getStudents);
+
+routerSequilize.post("/createStudents", createStudentProfile);
+
+routerSequilize.put("/updatedStudents/:id", updateStudentProfile)
 
 module.exports = routerSequilize;

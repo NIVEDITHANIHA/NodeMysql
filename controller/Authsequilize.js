@@ -38,11 +38,10 @@ const LoginAuth = async (req, res) => {
 
     try {
         const LoginedData = await executeSequelizeQuery(`select * from student_db.student_registation where student_email = ? and password =?`, [req.body.student_email, req.body.password], {}, sequilize.QueryTypes.SELECT)
-
-        console.log(LoginedData);
-
         if (LoginedData) {
-            var token = jwt.sign({ id: LoginedData.id }, 'shhhhh');
+            console.log(LoginedData.res[0].id);
+            const token = jwt.sign({ id: LoginedData.res[0].id }, 'superuserToken');
+            console.log("token", token);
             res.status(200).json({
                 success: true,
                 message: "Succesfully logined the student",
@@ -71,4 +70,35 @@ const LoginAuth = async (req, res) => {
 
     }
 }
-module.exports = { registrationAuth, LoginAuth }
+
+const getStudentLogined = async (req, res) => {
+    const id = req.payload
+    console.log(id);
+    try {
+      const getloginedStudent = await executeSequelizeQuery("select * from student_db.student_registation where id=?",[id], {}, sequilize.QueryTypes.SELECT)
+        console.log("getloginedStudent.res", getloginedStudent);
+        if (getloginedStudent.res) {
+          res.status(200).send({
+            success: true,
+            message: "Students List",
+            totalLength: getloginedStudent.res.length,
+            data: getloginedStudent.res,
+          });
+        } else {
+          res.status(406).send({
+            success: false,
+            message: "No students are founded",
+            data: getloginedStudent.err
+          });
+        }
+  
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        message: "Error in students",
+        err,
+      });
+    }
+  };
+  
+module.exports = { registrationAuth, LoginAuth ,getStudentLogined}
