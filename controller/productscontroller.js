@@ -1,7 +1,7 @@
 const { dbModelSequilize } = require("../config/sequilizeconfig");
 
 const product = dbModelSequilize.products
-console.log("dbModelSequilize",dbModelSequilize);
+// console.log("dbModelSequilize",dbModelSequilize);
 
 const addProducts = async (req, res) => {
     const { title, price, description, published } = req.body
