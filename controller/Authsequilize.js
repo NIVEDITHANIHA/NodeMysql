@@ -71,34 +71,51 @@ const LoginAuth = async (req, res) => {
     }
 }
 
-const getStudentLogined = async (req, res) => {
+const getStudentLogined = (req, res) => {
     const id = req.payload
     console.log(id);
-    try {
-      const getloginedStudent = await executeSequelizeQuery("select * from student_db.student_registation where id=?",[id], {}, sequilize.QueryTypes.SELECT)
-        console.log("getloginedStudent.res", getloginedStudent);
+
+    new Promise((resolve, reject) => {
+        executeSequelizeQuery("select * from student_db.student_registation where id=?", [id], {}, sequilize.QueryTypes.SELECT)
+            .then(result => resolve(result))
+            .catch(err => reject(err));
+
+    }).then((getloginedStudent) => {
+        console.log("getloginedStudent.res", getloginedStudent.res);
         if (getloginedStudent.res) {
-          res.status(200).send({
-            success: true,
-            message: "Students List",
-            totalLength: getloginedStudent.res.length,
-            data: getloginedStudent.res,
-          });
+            res.status(200).send({
+                success: true,
+                message: "Students List",
+                totalLength: getloginedStudent.res.length,
+                data: getloginedStudent.res,
+            });
         } else {
-          res.status(406).send({
-            success: false,
-            message: "No students are founded",
-            data: getloginedStudent.err
-          });
+            res.status(406).send({
+                success: false,
+                message: "No students are founded",
+                data: getloginedStudent.err
+            });
         }
-  
-    } catch (err) {
-      res.status(500).send({
-        success: false,
-        message: "Error in students",
-        err,
-      });
-    }
-  };
-  
-module.exports = { registrationAuth, LoginAuth ,getStudentLogined}
+
+    }).catch((err) => {
+        res.status(500).send({
+            success: false,
+            message: "Error in students",
+            err,
+        });
+    })
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = { registrationAuth, LoginAuth, getStudentLogined }
