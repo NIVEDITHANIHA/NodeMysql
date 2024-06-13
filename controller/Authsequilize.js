@@ -107,6 +107,25 @@ const getStudentLogined = (req, res) => {
 
 };
 
+const getAllStudents = (req, res) => {
+
+    const getData = executeSequelizeQuery(`select *  from student_db.student left outer join student_db.student_registation using (id) left outer join student_db.products using (id)`, {}, {}, sequilize.QueryTypes.SELECT).then((getResponse) => {
+        // console.log(getResponse);
+        res.status(200).json({
+            success: true,
+            message: "All students Details Listed:",
+            data: getResponse.res
+        })
+
+    }).catch((err) => {
+        res.status(500).json({
+            success: true,
+            message: "Server Error:",
+            data: err
+        })
+    })
+
+}
 
 
 
@@ -117,5 +136,4 @@ const getStudentLogined = (req, res) => {
 
 
 
-
-module.exports = { registrationAuth, LoginAuth, getStudentLogined }
+module.exports = { registrationAuth, LoginAuth, getStudentLogined, getAllStudents }

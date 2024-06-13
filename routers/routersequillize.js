@@ -1,7 +1,7 @@
 const express = require('express');
 const { getStudents, createStudentProfile, updateStudentProfile } = require('../controller/studentsequilizeController');
 const { addProducts, getAllProducts } = require('../controller/productscontroller');
-const { registrationAuth, LoginAuth, getStudentLogined } = require('../controller/Authsequilize');
+const { registrationAuth, LoginAuth, getStudentLogined, getAllStudents } = require('../controller/Authsequilize');
 const { authjwtmiddleware } = require('../middleware/Authjwtmiddleware');
 const routerSequilize = express.Router()
 
@@ -28,6 +28,7 @@ routerSequilize.post("/student_register", registrationAuth);
 routerSequilize.post("/student_login",LoginAuth);
 
 routerSequilize.get("/getLogined_students", authjwtmiddleware, getStudentLogined);
+routerSequilize.get("/getallstudents", getAllStudents);
 
 
 /* get All Api */
