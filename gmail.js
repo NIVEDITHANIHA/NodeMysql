@@ -7,7 +7,8 @@ const emailSend = (req,res)=>{
     service: 'gmail',
     auth: {
       user: 'nivedha.niha@gmail.com',
-      pass: 'emzf kdxy gzyg atjl'
+      pass: 'password'
+      
     }
   });
   
