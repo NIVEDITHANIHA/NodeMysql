@@ -21,10 +21,19 @@ const emailSend = (req,res)=>{
   
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
+      res.status(500).json({
+        success :true,
+        message :"Email sending Failed",
+        data:mailOptions
+      })
       console.log("error",error);
     } else {
       console.log('Email sent: ' + info.response);
-      res.json(mailOptions)
+      res.status(200).json({
+        success :true,
+        message :"Email has been send Succesfully",
+        data:mailOptions
+      })
     }
   });
 }
