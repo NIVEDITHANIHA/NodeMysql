@@ -8,7 +8,7 @@ const routerSequilize = require('./routers/routersequillize')
 const helmet = require("helmet")
 let result = dotenv.config();
 // console.log(result);
-
+const {emailSend} =require("./gmail")
 
 const server = express();
 /* securing the  HTTP header */
