@@ -7,7 +7,7 @@ const emailSend = (req,res)=>{
     service: 'gmail',
     auth: {
       user: 'nivedha.niha@gmail.com',
-      pass: 'password'
+        pass: process.env.PASS
       
     }
   });
@@ -22,9 +22,9 @@ const emailSend = (req,res)=>{
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       res.status(500).json({
-        success :true,
+        success :false,
         message :"Email sending Failed",
-        data:mailOptions
+        data:error
       })
       console.log("error",error);
     } else {
