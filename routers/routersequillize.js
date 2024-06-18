@@ -4,6 +4,7 @@ const { addProducts, getAllProducts } = require('../controller/productscontrolle
 const { registrationAuth, LoginAuth, getStudentLogined, getAllStudents } = require('../controller/Authsequilize');
 const { authjwtmiddleware } = require('../middleware/Authjwtmiddleware');
 const { emailSend } = require('../gmail');
+const { inbox } = require('../inbox');
 const routerSequilize = express.Router()
 
 /*______________________________________________________________________________________________________________________________________________________________________________
@@ -43,6 +44,7 @@ routerSequilize.put("/updatedStudents/:id", updateStudentProfile)
 /* Api for sending Email */
 
 routerSequilize.post("/sendemail", emailSend);
+routerSequilize.get("/getemail", inbox);
 
 
 module.exports = routerSequilize;
