@@ -3,9 +3,9 @@ const inspect = require('util').inspect;
 
 const inbox = (req, res) => {
     const imap = new Imap({
-        user: 'maillearng@gmail.com',
-        password: 'tvso cyxq schk udqr',
-        host: 'imap.gmail.com',
+        user: process.env.USERMAIL,
+        password: process.env.PASS,
+        host: process.env.HOSTMAIL,
         port: 993,
         tls: true,
         tlsOptions: { rejectUnauthorized: false }
@@ -57,7 +57,16 @@ const inbox = (req, res) => {
                         });
                         stream.once('end', function () {
                             if (info.which === 'TEXT') {
-                                message.body = buffer
+                                const combinedRegex = /(<style[^>]*>[\s\S]*?<\/style>)|(<[^>]+>[\s\S]*?<\/[^>]+>)/g;
+                                const extractedParts = buffer.toString().match(combinedRegex);
+                                if (extractedParts) {
+                                    // console.log('Extracted Parts:', extractedParts);
+                                    const bodyContent = extractedParts.join('');
+                                    // console.log('Body Content:', bodyContent);
+
+                                    message.body = bodyContent;
+                                }
+
                             } else {
                                 message.headers = Imap.parseHeader(buffer);
 

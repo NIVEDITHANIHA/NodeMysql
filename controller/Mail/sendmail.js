@@ -6,7 +6,7 @@ const emailSend = (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'maillearng@gmail.com',
+      user: process.env.USERMAIL,
       pass: process.env.PASS
 
     }

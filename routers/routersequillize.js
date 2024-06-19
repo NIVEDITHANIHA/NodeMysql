@@ -3,8 +3,8 @@ const { getStudents, createStudentProfile, updateStudentProfile } = require('../
 const { addProducts, getAllProducts } = require('../controller/productscontroller');
 const { registrationAuth, LoginAuth, getStudentLogined, getAllStudents } = require('../controller/Authsequilize');
 const { authjwtmiddleware } = require('../middleware/Authjwtmiddleware');
-const { emailSend } = require('../gmail');
-const { inbox } = require('../inbox');
+const { emailSend } = require('../controller/Mail/sendmail');
+const { inbox } = require('../controller/Mail/inbox');
 const routerSequilize = express.Router()
 
 /*______________________________________________________________________________________________________________________________________________________________________________
