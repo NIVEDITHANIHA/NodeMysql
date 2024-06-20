@@ -1,7 +1,7 @@
 const Imap = require('node-imap');
 const inspect = require('util').inspect;
 
-const inbox = (req, res) => {
+const inbox = (mailboxName, callback) => {
     const imap = new Imap({
         user: process.env.USERMAIL,
         password: process.env.PASS,
@@ -12,27 +12,28 @@ const inbox = (req, res) => {
     });
 
     function openInbox(cb) {
-        imap.openBox('INBOX', true, cb);
+        imap.openBox(mailboxName, true, cb);
     }
 
     imap.once('ready', function () {
         openInbox(function (err, box) {
             if (err) {
-                res.status(500).json({ error: 'Failed to open inbox' });
+
                 imap.end();
+                callback(err, []);    
                 return;
             }
 
             imap.search(['ALL'], function (err, results) {
                 if (err) {
-                    res.status(500).json({ error: 'Failed to search emails' });
                     imap.end();
-                    return;
+                    callback(err, []);    
+                   return;
                 }
 
                 if (results.length === 0) {
-                    res.status(200).json({ data: [] });
                     imap.end();
+                    callback(null, []);
                     return;
                 }
 
@@ -74,20 +75,17 @@ const inbox = (req, res) => {
                         });
                     });
                     msg.once('end', function () {
-                        console.log(prefix + 'Finished');
                         messages.push(message);
                     });
                 });
 
                 f.once('error', function (err) {
-                    console.log('Fetch error: ' + err);
-                    res.status(500).json({ error: 'Failed to fetch messages' });
+                    callback(err, null);
                     imap.end();
                 });
 
                 f.once('end', function () {
-                    console.log('Done fetching all messages!');
-                    res.status(200).json({ data: messages });
+                    callback(null, messages);
                     imap.end();
                 });
             });
@@ -95,8 +93,7 @@ const inbox = (req, res) => {
     });
 
     imap.once('error', function (err) {
-        console.log('IMAP Error: ' + err);
-        res.status(500).json({ error: 'IMAP connection error' });
+        callback(err, null);
     });
 
     imap.once('end', function () {

@@ -4,7 +4,7 @@ const { addProducts, getAllProducts } = require('../controller/productscontrolle
 const { registrationAuth, LoginAuth, getStudentLogined, getAllStudents } = require('../controller/Authsequilize');
 const { authjwtmiddleware } = require('../middleware/Authjwtmiddleware');
 const { emailSend } = require('../controller/Mail/sendmail');
-const { inbox } = require('../controller/Mail/inbox');
+const { getInbox, getAllMail, getSentMail, getDeletedMail } = require('../controller/Mail/allmail');
 const routerSequilize = express.Router()
 
 /*______________________________________________________________________________________________________________________________________________________________________________
@@ -27,7 +27,7 @@ routerSequilize.get("/getAllProducts", getAllProducts);
 /* API For JWT AUTH */
 
 routerSequilize.post("/student_register", registrationAuth);
-routerSequilize.post("/student_login",LoginAuth);
+routerSequilize.post("/student_login", LoginAuth);
 
 routerSequilize.get("/getLogined_students", authjwtmiddleware, getStudentLogined);
 routerSequilize.get("/getallstudents", getAllStudents);
@@ -44,7 +44,11 @@ routerSequilize.put("/updatedStudents/:id", updateStudentProfile)
 /* Api for sending Email */
 
 routerSequilize.post("/sendemail", emailSend);
-routerSequilize.get("/getemail", inbox);
+routerSequilize.get("/inbox", getInbox);
+routerSequilize.get("/allmail", getAllMail);
+routerSequilize.get("/sentmail", getSentMail);
+routerSequilize.get("/deletedmail", getDeletedMail);
+
 
 
 module.exports = routerSequilize;
