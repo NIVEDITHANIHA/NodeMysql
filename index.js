@@ -47,6 +47,8 @@ const createServer = new Server(createConnection, {
 
 createServer.on("connection", (socket) => {
   console.log(`Server connected successfully ${socket.id}`);
+  // ? for  the users who  are using 
+  socket.emit("message" , "Welcome to the CHAT APPLICATION")
   socket.on("message", (data) => {
     date = new Date();
     const options = {
@@ -58,9 +60,18 @@ createServer.on("connection", (socket) => {
     const formattedDate = date.toLocaleString('en-US', options).replace(',', '');
     console.log(formattedDate);
     
-    console.log(`Received message: ${data}`);
-    createServer.emit("message", `${socket.id}, ${data} ${formattedDate}`);
+    console.log(`Received message: ${socket.id.substring(0,4)}, ${data}, ${formattedDate}`);
+    createServer.emit("message", `${socket.id.substring(0,4)}, ${data} ${formattedDate}`);
   });
+
+  socket.on("disconnect",()=>{
+    socket.broadcast.emit("message" ,`${socket.id.substring(0,4)} the User is Disconected `)
+  })
+
+  socket.on("activity",(datas)=>{
+    socket.broadcast.emit("activity" ,`${datas} the User is Typing ... `)
+
+  })
 });
 
 appServer.get("/", (req, res) => {

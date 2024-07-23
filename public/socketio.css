@@ -60,6 +60,10 @@ li {
     margin: 0;
 }
 
+#activityListen{
+    color: black;
+    font-size: 1.2rem;
+}
 @media (max-width: 1280px) {
     .show {
         width: 60%;
