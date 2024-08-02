@@ -19,19 +19,40 @@
             <h1 class="text-center text-warning m-3">Send Message</h1>
             <form class="forms">
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="messages" placeholder="Type a Message"
-                        style="height: 120px"></input>
-                    <label >Type a Message</label>
+                    <input type="text" class="form-control" id="name" placeholder="Name">
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="chatroom" placeholder="Chat Room">
+                    <label for="chatroom">Chat Room</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="messages" placeholder="Type a Message" style="height: 120px">
+                    <label for="messages">Type a Message</label>
                 </div>
                 <button class="btn btn-warning" type="submit">Send</button>
             </form>
         </div>
+        <p id="CommonChat"></p>
+    </div>
+
+    <div class="afterroom hidden">
         <div class="display">
             <ul class="myList"></ul>
-            <P id="activityListen"></P>
+            <p id="activityListen"></p>
+        </div>
+        
+        <div class="input-group">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="textonly" placeholder="Send Message">
+                <label for="textonly">Send Message</label>
+            </div>
+            <button class="btn btn-primary" type="button" onclick="sendMessageOnly()">Send</button>
         </div>
     </div>
+    
+
     <script src="socketio.js"></script>
-    </body>
+</body>
 
 </html>

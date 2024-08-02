@@ -46,10 +46,14 @@ const createServer = new Server(createConnection, {
 });
 
 createServer.on("connection", (socket) => {
+  let storedName ;
+  let storedRoom ;
+
   console.log(`Server connected successfully ${socket.id}`);
   // ? for  the users who  are using 
-  socket.emit("message" , "Welcome to the CHAT APPLICATION")
+  socket.emit("commonchat" ,  {"text" : "Welcome to the chat APP"});
   socket.on("message", (data) => {
+    console.log(data);
     date = new Date();
     const options = {
       hour: '2-digit',
@@ -60,16 +64,38 @@ createServer.on("connection", (socket) => {
     const formattedDate = date.toLocaleString('en-US', options).replace(',', '');
     console.log(formattedDate);
     
-    console.log(`Received message: ${socket.id.substring(0,4)}, ${data}, ${formattedDate}`);
-    createServer.emit("message", `${socket.id.substring(0,4)}, ${data} ${formattedDate}`);
+
+    console.log(`Received message: ${socket.id.substring(0,4)}, ${JSON.stringify(data)}, ${formattedDate}`);
+    createServer.emit("message", 
+      {"text" : data.text,
+        "name": data.name,
+        "chatRoom" : data.chatRoom,
+        "date" :formattedDate
+
+    });
+
+    storedName = data.name
+    storedRoom = data.chatRoom
+  
   });
 
-  socket.on("disconnect",()=>{
-    socket.broadcast.emit("message" ,`${socket.id.substring(0,4)} the User is Disconected `)
+
+  socket.on("chatroom" ,()=>{
+    console.log(storedRoom);
+    createServer.emit("chatroom" ,{
+      name : storedName,
+      chatRoom:storedRoom
+    } )
+
   })
 
-  socket.on("activity",(datas)=>{
-    socket.broadcast.emit("activity" ,`${datas} the User is Typing ... `)
+  socket.on("disconnect",()=>{
+    createServer.emit("disconnected" ,`${storedName} the User is Disconected `)
+  })
+
+  socket.on("activity",()=>{
+    console.log(storedName);
+    socket.broadcast.emit("activity" ,`${storedName} is Typing ... `)
 
   })
 });
